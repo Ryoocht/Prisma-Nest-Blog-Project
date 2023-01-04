@@ -7,22 +7,25 @@ import { UpdateCategoryDto } from './dto/update-category.dto';
 export class CategoriesService {
   constructor(private prismaService: PrismaService) {}
   create(createCategoryDto: CreateCategoryDto) {
-    return this.prismaService
+    return this.prismaService.category.create({ data: createCategoryDto });
   }
 
   findAll() {
-    return `This action returns all categories`;
+    return this.prismaService.category.findMany();
   }
 
   findOne(id: string) {
-    return `This action returns a #${id} category`;
+    return this, this.prismaService.category.findUnique({ where: { id } });
   }
 
   update(id: string, updateCategoryDto: UpdateCategoryDto) {
-    return `This action updates a #${id} category`;
+    return this.prismaService.category.update({
+      where: { id },
+      data: updateCategoryDto,
+    });
   }
 
   remove(id: string) {
-    return `This action removes a #${id} category`;
+    return this.prismaService.category.delete({ where: { id } });
   }
 }
