@@ -12,4 +12,6 @@ export class CreatePostDto {
   body: string;
 
   authorId: string;
+
+  categories: string[];
 }
