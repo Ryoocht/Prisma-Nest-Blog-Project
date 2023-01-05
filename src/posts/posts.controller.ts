@@ -23,13 +23,13 @@ export class PostsController {
 
   @Post()
   @UseGuards(JwtAuthGuard)
-  create(@Me() me, @Body() { authorId, ...createPostDto }: CreatePostDto) {
+  create(@Me() { id }, @Body() createPostDto: CreatePostDto) {
     const categories = createPostDto.categories?.map((category) => ({
       id: category,
     }));
     return this.postsService.create({
       ...createPostDto,
-      author: { connect: { id: authorId } },
+      author: { connect: { id } },
       categories: { connect: categories },
     });
   }
@@ -51,7 +51,7 @@ export class PostsController {
     }));
     return this.postsService.update(id, {
       ...updatePostDto,
-      categories: { connect: categories },
+      categories: { set: categories },
     });
   }
 

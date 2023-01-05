@@ -11,7 +11,5 @@ export class CreatePostDto {
   @MinLength(3)
   body: string;
 
-  authorId: string;
-
   categories: string[];
 }
